@@ -1,0 +1,8 @@
+bcl		BCL
+cl1		CL1
+weightMat		weight matrices
+godambe		asymptotic covariance matrix
+iee		independent estimating equations 
+solvewtsc	nonlinear system solving
+wtsc		weighted scores equations 
+wtsc.wrapper		weighted scores wrapper

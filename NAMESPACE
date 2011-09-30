@@ -1,0 +1,6 @@
+
+export(bcl, cl1, weightMat, godambe, iee, solvewtsc, scoreCov, wtsc.wrapper)
+export(approxbvncdf, dmargmodel, pmargmodel) 
+import(mvtnorm)
+import(rootSolve)
+
