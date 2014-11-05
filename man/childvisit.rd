@@ -13,9 +13,9 @@ children.
 \format{
   A data frame with 292 observations on the following 6 variables.
   \describe{
-    \item{\code{id}}{The index for individuals.}
-    \item{\code{age}}{The treatment binary covariate.}
-    \item{\code{sex}}{The subject's infection binary response.}
+    \item{\code{id}}{The child ID.}
+    \item{\code{age}}{The age in months.}
+    \item{\code{sex}}{The sex indicator.}
     \item{\code{matsmst}}{The maternal smoking status.}
     \item{\code{quarter}}{The time indicator.}
     \item{\code{hospvis}}{The response vector  of quarterly numbers of hospital visits.}

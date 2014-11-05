@@ -23,8 +23,8 @@ and if the percentage of severe infections decreased over time.
      }
 }
 \source{
-         Madsen L., Fang Y. (2011). .Regression Analysis for Discrete Longitudinal Data.
-\emph{Biometrics}, in press.
+        Molenberghs, G., Verbeke, G., 2005. \emph{Models for Discrete Longitudinal Data}. 
+        Springer, NY.
 }
 
 \keyword{datasets}

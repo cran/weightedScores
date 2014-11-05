@@ -76,7 +76,7 @@ Harry Joe \email{harry.joe@ubc.ca}
   \code{\link{iee}}
 }
 \examples{
-\dontrun{
+
 ################################################################################
 #                      read and set up data set
 ################################################################################
@@ -108,7 +108,7 @@ print(c(i.est$reg,i.est$gam))
 est.rho<-cl1(b=i.est$reg,gam=i.est$gam,xdat,ydat,id,tvec,margmodel,corstr)
 cat("\nest.rho: CL1 estimates\n")
 print(est.rho$e)
-}
+
 }
 
 

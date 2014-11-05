@@ -76,7 +76,7 @@ Harry Joe \email{harry.joe@ubc.ca}
 }
 
 \examples{
-\dontrun{
+
 ################################################################################
 #                      read and set up the data set
 ################################################################################
@@ -122,6 +122,6 @@ tvec,margmodel,link)
 cat("ws=parameter estimates\n")
 print(ws$r)
 }
-}
+
 
 

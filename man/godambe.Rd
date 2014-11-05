@@ -80,7 +80,7 @@ Harry Joe \email{harry.joe@ubc.ca}
 }
 
 \examples{
-\dontrun{
+
 ################################################################################
 #                      read and set up the data set
 ################################################################################
@@ -102,7 +102,7 @@ margmodel="poisson"
 ################################################################################
 #                      select the  correlation structure
 ################################################################################
-corstr="unstr"
+corstr="exch"
 ################################################################################
 #                      perform CL1 estimation
 ################################################################################
@@ -132,7 +132,7 @@ acov<-godambe(ws$r,WtScMat,xdat,ydat,id,tvec,margmodel)
 cat("\nacov: inverse Godambe matrix with W based on first-stage wt
 matrices\n")
 print(acov)
-}
+
 }
 
 \keyword{regression}

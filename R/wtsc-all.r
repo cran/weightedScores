@@ -42,8 +42,8 @@ linked.mu<-function(x,b,link)
 # mu the mean parameter of the univariate distribution.
 # gam the parameter gamma of  the negative binomial distribution.
 # invgam the inverse of parameter  gamma of negative binomial distribution.
-# margmodel indicates the marginal model. Choices are “poisson” for Poisson, “bernoulli” for
-# Bernoulli, and “nb1” , “nb2” for the NB1 and NB2 parametrization of negative
+# margmodel indicates the marginal model. Choices are ?poisson? for Poisson, ?bernoulli? for
+# Bernoulli, and ?nb1? , ?nb2? for the NB1 and NB2 parametrization of negative
 # binomial in Cameron and Trivedi (1998).
 # output:
 # the density of the univariate marginal  distribution
@@ -68,8 +68,8 @@ dmargmodel<-function(y,mu,gam,invgam,margmodel)
 # mu the mean parameter of the univariate distribution.
 # gam the parameter gamma of  the negative binomial distribution.
 # invgam the inverse of parameter  gamma of negative binomial distribution.
-# margmodel indicates the marginal model. Choices are “poisson” for Poisson, “bernoulli” for
-# Bernoulli, and “nb1” , “nb2” for the NB1 and NB2 parametrization of negative
+# margmodel indicates the marginal model. Choices are ?poisson? for Poisson, ?bernoulli? for
+# Bernoulli, and ?nb1? , ?nb2? for the NB1 and NB2 parametrization of negative
 # binomial in Cameron and Trivedi (1998).
 # output:
 # the cdf of the univariate marginal  distribution
@@ -94,8 +94,8 @@ pmargmodel<-function(y,mu,gam,invgam,margmodel)
 # mu the mean parameter of the univariate distribution.
 # gam the parameter gamma of  the negative binomial distribution.
 # invgam the inverse of parameter  gamma of negative binomial distribution.
-# margmodel indicates the marginal model. Choices are “poisson” for Poisson, “bernoulli” for
-# Bernoulli, and “nb1” , “nb2” for the NB1 and NB2 parametrization of negative
+# margmodel indicates the marginal model. Choices are ?poisson? for Poisson, ?bernoulli? for
+# Bernoulli, and ?nb1? , ?nb2? for the NB1 and NB2 parametrization of negative
 # binomial in Cameron and Trivedi (1998).
 # output:
 # the quantile of the univariate marginal  distribution
@@ -119,11 +119,11 @@ qmargmodel<-function(y,mu,gam,invgam,margmodel)
 # param the vector of regression and not regression parameters
 # xdat the matrix of covariates (use the constant 1 for the first covariate)
 # ydat the vector with the response
-# margmodel indicates the marginal model. Choices are “poisson” for Poisson, 
-# “bernoulli” for Bernoulli, and “nb1” , “nb2” for the NB1 and NB2 
+# margmodel indicates the marginal model. Choices are ?poisson? for Poisson, 
+# ?bernoulli? for Bernoulli, and ?nb1? , ?nb2? for the NB1 and NB2 
 # parametrization of negative binomial in Cameron and Trivedi (1998)
-# link is the link function. Choices are “log” for the log link function, 
-# “logit” for the logit link function, and “probit” for the probit link function.
+# link is the link function. Choices are ?log? for the log link function, 
+# ?logit? for the logit link function, and ?probit? for the probit link function.
 # output:
 # negative univariate logikelihood assuming independence within clusters
 marglik<-function(param,xdat,ydat,margmodel,link)
@@ -143,11 +143,11 @@ marglik<-function(param,xdat,ydat,margmodel,link)
 # negative binomial regression.
 # xdat the matrix of covariates (use the constant 1 for the first covariate)
 # ydat the vector with the response
-# margmodel indicates the marginal model. Choices are “poisson” for Poisson, 
-# “bernoulli” for Bernoulli, and “nb1” , “nb2” for the NB1 and NB2 
+# margmodel indicates the marginal model. Choices are ?poisson? for Poisson, 
+# ?bernoulli? for Bernoulli, and ?nb1? , ?nb2? for the NB1 and NB2 
 # parametrization of negative binomial in Cameron and Trivedi (1998)
-# link is the link function. Choices are “log” for the log link function, 
-# “logit” for the logit link function, and “probit” for the probit link function.
+# link is the link function. Choices are ?log? for the log link function, 
+# ?logit? for the logit link function, and ?probit? for the probit link function.
 # output: A list containing the following components:
 # coef the vector with the ML estimated regression parameters
 # gam the ML estimate of gamma parameter
@@ -181,7 +181,7 @@ iee<-function(xdat,ydat,margmodel,link="log")
 # d the dimension
 # r a vector with correaltion parameters
 # corstr indicates the latent correlation structure of normal copula. 
-# Choices are “exch”, “ar”, and “unstr” for exchangeable, ar(1) and 
+# Choices are ?exch?, ?ar?, and ?unstr? for exchangeable, ar(1) and 
 # unstrucutred correlation structure, respectively. 
 # output:
 # the correlation matrix
@@ -215,13 +215,13 @@ cormat<-function(d,r,pairs,corstr)
 # ydat the vector with the response
 # id the the vector with the id
 # tvec the time related vector
-# margmodel indicates the marginal model. Choices are “poisson” for Poisson, 
-# “bernoulli” for Bernoulli, and “nb1” , “nb2” for the NB1 and NB2 
+# margmodel indicates the marginal model. Choices are ?poisson? for Poisson, 
+# ?bernoulli? for Bernoulli, and ?nb1? , ?nb2? for the NB1 and NB2 
 # parametrization of negative binomial in Cameron and Trivedi (1998)
-# link is the link function. Choices are “log” for the log link function, 
-# “logit” for the logit link function, and “probit” for the probit link function.
+# link is the link function. Choices are ?log? for the log link function, 
+# ?logit? for the logit link function, and ?probit? for the probit link function.
 # corstr indicates the latent correlation structure of normal copula. 
-# Choices are “exch”, “ar”, and “unstr” for exchangeable, ar(1) and 
+# Choices are ?exch?, ?ar?, and ?unstr? for exchangeable, ar(1) and 
 # unstrucutred correlation structure, respectively. 
 # output:
 # negative bivariate composite likelihood for multivariate normal copula 
@@ -286,13 +286,13 @@ bcl<-function(r,b,gam,xdat,ydat,id,tvec,margmodel,corstr,link="log")
 # ydat the vector with the response
 # id the the vector with the id
 # tvec the time related vector
-# margmodel indicates the marginal model. Choices are “poisson” for Poisson, 
-# “bernoulli” for Bernoulli, and “nb1” , “nb2” for the NB1 and NB2 
+# margmodel indicates the marginal model. Choices are ?poisson? for Poisson, 
+# ?bernoulli? for Bernoulli, and ?nb1? , ?nb2? for the NB1 and NB2 
 # parametrization of negative binomial in Cameron and Trivedi (1998)
-# link is the link function. Choices are “log” for the log link function, 
-# “logit” for the logit link function, and “probit” for the probit link function.
+# link is the link function. Choices are ?log? for the log link function, 
+# ?logit? for the logit link function, and ?probit? for the probit link function.
 # corstr indicates the latent correlation structure of normal copula. 
-# Choices are “exch”, “ar”, and “unstr” for exchangeable, ar(1) and 
+# Choices are ?exch?, ?ar?, and ?unstr? for exchangeable, ar(1) and 
 # unstrucutred correlation structure, respectively. 
 # output: A list containing the following components:
 # minimum the value of the estimated minimum of CL1 for MVN copula
@@ -365,11 +365,11 @@ maxpairs<-function(d)
 # gam the gamma parameter
 # invgam the inverse of gamma parameter
 # ub the truncation value
-# margmodel indicates the marginal model. Choices are “poisson” for Poisson,
-# “bernoulli” for Bernoulli, and “nb1” , “nb2” for the NB1 and NB2
+# margmodel indicates the marginal model. Choices are ?poisson? for Poisson,
+# ?bernoulli? for Bernoulli, and ?nb1? , ?nb2? for the NB1 and NB2
 # parametrization of negative binomial in Cameron and Trivedi (1998)
-# link is the link function. Choices are “log” for the log link function,
-# “logit” for the logit link function, and “probit” for the probit link function.
+# link is the link function. Choices are ?log? for the log link function,
+# ?logit? for the logit link function, and ?probit? for the probit link function.
 # output:
 # the vector with the derivatives of the margmodel loglikelihood with respect to nu
 derlik.nu<-function(mu,gam,invgam,ub,margmodel,link)
@@ -402,11 +402,11 @@ derlik.nu<-function(mu,gam,invgam,ub,margmodel,link)
 # gam the gamma parameter
 # invgam the inverse of gamma parameter
 # y  the value of a non-negative integer quantile
-# margmodel indicates the marginal model. Choices are “poisson” for Poisson,
-# “bernoulli” for Bernoulli, and “nb1” , “nb2” for the NB1 and NB2
+# margmodel indicates the marginal model. Choices are ?poisson? for Poisson,
+# ?bernoulli? for Bernoulli, and ?nb1? , ?nb2? for the NB1 and NB2
 # parametrization of negative binomial in Cameron and Trivedi (1998)
-# link is the link function. Choices are “log” for the log link function,
-# “logit” for the logit link function, and “probit” for the probit link function.
+# link is the link function. Choices are ?log? for the log link function,
+# ?logit? for the logit link function, and ?probit? for the probit link function.
 # output:
 # the derivative of the margmodel loglikelihood with respect to nu
 iderlik.nu<-function(mu,gam,invgam,y,margmodel,link)
@@ -438,7 +438,7 @@ iderlik.nu<-function(mu,gam,invgam,y,margmodel,link)
 # invgam the inverse of gamma parameter
 # mu the mean parameter
 # ub the truncation value
-# margmodel indicates the marginal model. Choices are  “nb1” , “nb2” for
+# margmodel indicates the marginal model. Choices are  ?nb1? , ?nb2? for
 # the NB1 and NB2  parametrization of negative binomial in
 # Cameron and Trivedi (1998)
 # output:
@@ -463,7 +463,7 @@ derlik.gam<-function(mu,gam,invgam,ub,margmodel)
 # invgam the inverse of gamma parameter
 # mu the mean parameter
 # y  the value of a non-negative integer quantile
-# margmodel indicates the marginal model. Choices are  “nb1” , “nb2” for
+# margmodel indicates the marginal model. Choices are  ?nb1? , ?nb2? for
 # the NB1 and NB2  parametrization of negative binomial in
 # Cameron and Trivedi (1998)
 # output:
@@ -498,7 +498,7 @@ iderlik.gam<-function(mu,gam,invgam,y,margmodel)
 # invgam the inverse of gamma parameter
 # u the univariate cdfs
 # ub the truncation value
-# margmodel indicates the marginal model. Choices are  “nb1” , “nb2” for
+# margmodel indicates the marginal model. Choices are  ?nb1? , ?nb2? for
 # the NB1 and NB2  parametrization of negative binomial in
 # Cameron and Trivedi (1998)
 # output:
@@ -541,7 +541,7 @@ fisher.nu<-function(mu,gam,invgam,u,ub,margmodel,link)
 # invgam the inverse of gamma parameter
 # u the univariate cdfs
 # ub the truncation value
-# margmodel indicates the marginal model. Choices are  “nb1” , “nb2” for
+# margmodel indicates the marginal model. Choices are  ?nb1? , ?nb2? for
 # the NB1 and NB2  parametrization of negative binomial in
 # Cameron and Trivedi (1998)
 # output:
@@ -574,7 +574,7 @@ fisher.gam<-function(mu,gam,invgam,u,ub,margmodel)
 # invgam the inverse of gamma parameter
 # u the univariate cdfs
 # ub the truncation value
-# margmodel indicates the marginal model. Choices are  “nb1” , “nb2” for
+# margmodel indicates the marginal model. Choices are  ?nb1? , ?nb2? for
 # the NB1 and NB2  parametrization of negative binomial in
 # Cameron and Trivedi (1998)
 # output:
@@ -594,8 +594,8 @@ fisher.nu.gam<-function(mu,gam,invgam,u,ub,margmodel)
 # input:
 # mu the mean parameter of the univariate distribution.
 # gam the parameter gamma of  the negative binomial distribution.
-# margmodel indicates the marginal model. Choices are “poisson” for Poisson, “bernoulli” for
-# Bernoulli, and “nb1” , “nb2” for the NB1 and NB2 parametrization of negative
+# margmodel indicates the marginal model. Choices are ?poisson? for Poisson, ?bernoulli? for
+# Bernoulli, and ?nb1? , ?nb2? for the NB1 and NB2 parametrization of negative
 # binomial in Cameron and Trivedi (1998).
 # output:
 # the truncation value--upper bound
@@ -644,8 +644,8 @@ approxbvncdf<-function(r,x1,x2,x1s,x2s,x1c,x2c,x1f,x2f,t1,t2)
 # scgam the matrix of the score functions with respect to gam
 # index the bivariate pair
 # pmf the matrix of rectangle probabilities
-# margmodel indicates the marginal model. Choices are “poisson” for Poisson, “bernoulli” for
-# Bernoulli, and “nb1” , “nb2” for the NB1 and NB2 parametrization of negative
+# margmodel indicates the marginal model. Choices are ?poisson? for Poisson, ?bernoulli? for
+# Bernoulli, and ?nb1? , ?nb2? for the NB1 and NB2 parametrization of negative
 # binomial in Cameron and Trivedi (1998).
 scoreCov<-function(scnu,scgam,pmf,index,margmodel)
 { j1<-index[1]
@@ -667,8 +667,8 @@ scoreCov<-function(scnu,scgam,pmf,index,margmodel)
 # for unbalanced data
 # input:
 # tvec a vector of the time for an individual
-# margmodel indicates the marginal model. Choices are “poisson” for Poisson, “bernoulli” for
-# Bernoulli, and “nb1” , “nb2” for the NB1 and NB2 parametrization of negative
+# margmodel indicates the marginal model. Choices are ?poisson? for Poisson, ?bernoulli? for
+# Bernoulli, and ?nb1? , ?nb2? for the NB1 and NB2 parametrization of negative
 # binomial in Cameron and Trivedi (1998).
 subselect<-function(tvec,margmodel)
 { if(margmodel=="bernoulli" | margmodel=="poisson") sel<-tvec
@@ -693,13 +693,13 @@ subselect<-function(tvec,margmodel)
 # id the the vector with the id
 # tvec the time related vector
 # rh the vector with CL1 estimates
-# margmodel indicates the marginal model. Choices are “poisson” for Poisson, 
-# “bernoulli” for Bernoulli, and “nb1” , “nb2” for the NB1 and NB2 
+# margmodel indicates the marginal model. Choices are ?poisson? for Poisson, 
+# ?bernoulli? for Bernoulli, and ?nb1? , ?nb2? for the NB1 and NB2 
 # parametrization of negative binomial in Cameron and Trivedi (1998)
-# link is the link function. Choices are “log” for the log link function, 
-# “logit” for the logit link function, and “probit” for the probit link function.
+# link is the link function. Choices are ?log? for the log link function, 
+# ?logit? for the logit link function, and ?probit? for the probit link function.
 # corstr indicates the latent correlation structure of normal copula. 
-# Choices are “exch”, “ar”, and “unstr” for exchangeable, ar(1) and 
+# Choices are ?exch?, ?ar?, and ?unstr? for exchangeable, ar(1) and 
 # unstrucutred correlation structure, respectively. 
 # output: A list containing the following components:
 # omega the array with the Omega matrices
@@ -794,7 +794,7 @@ weightMat<-function(b,gam,rh,xdat,ydat,id,tvec,margmodel,corstr,link="log")
       { x1=z[,k1]; x2=z[,k2]
         x1s=zs[,k1]; x2s=zs[,k2]
         x1c=zc[,k1]; x1f=zf[,k1]
-        x2c=zc[,k1]; x2f=zf[,k2]
+        x2c=zc[,k2]; x2f=zf[,k2]
         t1=outer(pz[,k1],pz[,k2])
         t2=outer(dz[,k1],dz[,k2])
         if(corstr=="exch")
@@ -846,13 +846,13 @@ weightMat<-function(b,gam,rh,xdat,ydat,id,tvec,margmodel,corstr,link="log")
 # ydat the vector with the response
 # id the the vector with the id
 # tvec the time related vector
-# margmodel indicates the marginal model. Choices are “poisson” for Poisson, 
-# “bernoulli” for Bernoulli, and “nb1” , “nb2” for the NB1 and NB2 
+# margmodel indicates the marginal model. Choices are ?poisson? for Poisson, 
+# ?bernoulli? for Bernoulli, and ?nb1? , ?nb2? for the NB1 and NB2 
 # parametrization of negative binomial in Cameron and Trivedi (1998)
-# link is the link function. Choices are “log” for the log link function, 
-# “logit” for the logit link function, and “probit” for the probit link function.
+# link is the link function. Choices are ?log? for the log link function, 
+# ?logit? for the logit link function, and ?probit? for the probit link function.
 # corstr indicates the latent correlation structure of normal copula. 
-# Choices are “exch”, “ar”, and “unstr” for exchangeable, ar(1) and 
+# Choices are ?exch?, ?ar?, and ?unstr? for exchangeable, ar(1) and 
 # unstrucutred correlation structure, respectively. 
 # WtScMat is a list containing the following components:
 # omega the array with the Omega matrices
@@ -928,13 +928,13 @@ wtsc<-function(param,WtScMat,xdat,ydat,id,tvec,margmodel,link="log")
 # ydat the vector with the response
 # id the the vector with the id
 # tvec the time related vector
-# margmodel indicates the marginal model. Choices are “poisson” for Poisson, 
-# “bernoulli” for Bernoulli, and “nb1” , “nb2” for the NB1 and NB2 
+# margmodel indicates the marginal model. Choices are ?poisson? for Poisson, 
+# ?bernoulli? for Bernoulli, and ?nb1? , ?nb2? for the NB1 and NB2 
 # parametrization of negative binomial in Cameron and Trivedi (1998)
-# link is the link function. Choices are “log” for the log link function, 
-# “logit” for the logit link function, and “probit” for the probit link function.
+# link is the link function. Choices are ?log? for the log link function, 
+# ?logit? for the logit link function, and ?probit? for the probit link function.
 # corstr indicates the latent correlation structure of normal copula. 
-# Choices are “exch”, “ar”, and “unstr” for exchangeable, ar(1) and 
+# Choices are ?exch?, ?ar?, and ?unstr? for exchangeable, ar(1) and 
 # unstrucutred correlation structure, respectively. 
 # WtScMat is a list containing the following components:
 # omega the array with the Omega matrices
@@ -961,11 +961,11 @@ WtScMat=WtScMat,xdat=xdat,ydat=ydat,id=id,tvec=tvec,margmodel=margmodel,link=lin
 # omega the array with the Omega matrices
 # delta the array with the Delta matrices
 # X the array with the X matrices
-# margmodel indicates the marginal model. Choices are “poisson” for Poisson, 
-# “bernoulli” for Bernoulli, and “nb1” , “nb2” for the NB1 and NB2 
+# margmodel indicates the marginal model. Choices are ?poisson? for Poisson, 
+# ?bernoulli? for Bernoulli, and ?nb1? , ?nb2? for the NB1 and NB2 
 # parametrization of negative binomial in Cameron and Trivedi (1998)
-# link is the link function. Choices are “log” for the log link function, 
-# “logit” for the logit link function, and “probit” for the probit link function.
+# link is the link function. Choices are ?log? for the log link function, 
+# ?logit? for the logit link function, and ?probit? for the probit link function.
 # output:
 # the inverse Godambe matrix
 godambe<-function(param,WtScMat,xdat,ydat,id,tvec,margmodel,link="log")
@@ -1063,14 +1063,14 @@ godambe<-function(param,WtScMat,xdat,ydat,id,tvec,margmodel,link="log")
 # omega the array with the Omega matrices
 # delta the array with the Delta matrices
 # X the array with the X matrices
-# margmodel indicates the marginal model. Choices are “poisson” for Poisson, 
-# “bernoulli” for Bernoulli, and “nb1” , “nb2” for the NB1 and NB2 
+# margmodel indicates the marginal model. Choices are ?poisson? for Poisson, 
+# ?bernoulli? for Bernoulli, and ?nb1? , ?nb2? for the NB1 and NB2 
 # parametrization of negative binomial in Cameron and Trivedi (1998)
 # corstr indicates the latent correlation structure of normal copula. 
-# Choices are “exch”, “ar”, and “unstr” for exchangeable, ar(1) and 
+# Choices are ?exch?, ?ar?, and ?unstr? for exchangeable, ar(1) and 
 # unstrucutred correlation structure, respectively. 
-# link is the link function. Choices are “log” for the log link function, 
-# “logit” for the logit link function, and “probit” for the probit link function.
+# link is the link function. Choices are ?log? for the log link function, 
+# ?logit? for the logit link function, and ?probit? for the probit link function.
 # iprint indicates printing of some intermediate results, default FALSE
 wtsc.wrapper<-function(xdat,ydat,id,tvec,margmodel,corstr,link="log",iprint=FALSE)
 { if(margmodel=="nb1" | margmodel=="nb2" | margmodel=="poisson") link="log"

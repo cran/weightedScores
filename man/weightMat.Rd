@@ -73,7 +73,7 @@ Harry Joe \email{harry.joe@ubc.ca}
 }
 
 \examples{
-\dontrun{
+
 ################################################################################
 #                      read and set up the data set
 ################################################################################
@@ -100,16 +100,17 @@ corstr="ar"
 i.est<-iee(xdat,ydat,margmodel,link)
 cat("\niest: IEE estimates\n")
 print(c(i.est$reg,i.est$gam))
-est.rho<-cl1(b=i.est$reg,gam=i.est$gam,xdat,ydat,id,tvec,margmodel,corstr,link)
-cat("\nest.rho: CL1 estimates\n")
-print(est.rho$e)
+# est.rho<-cl1(b=i.est$reg,gam=i.est$gam,xdat,ydat,id,tvec,margmodel,corstr,link)
+# cat("\nest.rho: CL1 estimates\n")
+# print(est.rho$e)
+# [1] 0.8941659
 ################################################################################
 #                      obtain the fixed weight matrices
 ################################################################################
-WtScMat<-weightMat(b=i.est$reg,gam=i.est$gam,rh=est.rho$e,
+WtScMat<-weightMat(b=i.est$reg,gam=i.est$gam,rh=0.8941659,
 xdat,ydat,id,tvec,margmodel,corstr,link)
 }
-}
+
 
 
 

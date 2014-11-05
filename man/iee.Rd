@@ -53,7 +53,7 @@ Harry Joe \email{harry.joe@ubc.ca}
 }
 
 \examples{
-\dontrun{
+
 ################################################################################
 #                      read and set up data set
 ################################################################################
@@ -76,7 +76,7 @@ margmodel="bernoulli"
 i.est<-iee(xdat,ydat,margmodel)
 cat("\niest: IEE estimates\n")
 print(c(i.est$reg,i.est$gam))
-}
+
 }
 \keyword{regression}
 

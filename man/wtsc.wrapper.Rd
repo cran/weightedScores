@@ -67,7 +67,7 @@ Harry Joe \email{harry.joe@ubc.ca}
 }
 
 \examples{
-\dontrun{
+
 ################################################################################
 #                      read and set up the data set
 ################################################################################
@@ -83,36 +83,17 @@ id<-childvisit$id
 #time
 tvec<-childvisit$q
 ################################################################################
-out<-wtsc.wrapper(xdat,ydat,id,tvec,margmodel="poisson",corstr="exch",iprint=TRUE)
-out<-wtsc.wrapper(xdat,ydat,id,tvec,margmodel="nb1",corstr="exch",iprint=TRUE)
-out<-wtsc.wrapper(xdat,ydat,id,tvec,margmodel="nb2",corstr="exch",iprint=TRUE)
-
-out<-wtsc.wrapper(xdat,ydat,id,tvec,margmodel="poisson",corstr="ar",iprint=TRUE)
 out<-wtsc.wrapper(xdat,ydat,id,tvec,margmodel="nb1",corstr="ar",iprint=TRUE)
-out<-wtsc.wrapper(xdat,ydat,id,tvec,margmodel="nb2",corstr="ar",iprint=TRUE)
-
-out<-wtsc.wrapper(xdat,ydat,id,tvec,margmodel="poisson",corstr="unstr",iprint=TRUE)
-out<-wtsc.wrapper(xdat,ydat,id,tvec,margmodel="nb1",corstr="unstr",iprint=TRUE)
-out<-wtsc.wrapper(xdat,ydat,id,tvec,margmodel="nb2",corstr="unstr",iprint=TRUE)
 ################################################################################
 #                        transform to binary responses                         #
 ################################################################################
 y2<-ydat
 y2[ydat>0]<-1
 ################################################################################
-out<-wtsc.wrapper(xdat,y2,id,tvec,margmodel="bernoulli",corstr="exch",iprint=TRUE)
 out<-wtsc.wrapper(xdat,y2,id,tvec,margmodel="bernoulli",link="probit",
 corstr="exch",iprint=TRUE)
-
-out<-wtsc.wrapper(xdat,y2,id,tvec,margmodel="bernoulli",corstr="ar",iprint=TRUE)
-out<-wtsc.wrapper(xdat,y2,id,tvec,margmodel="bernoulli",link="probit",
-corstr="ar",iprint=TRUE)
-
-out<-wtsc.wrapper(xdat,y2,id,tvec,margmodel="bernoulli",corstr="unstr",iprint=TRUE)
-out<-wtsc.wrapper(xdat,y2,id,tvec,margmodel="bernoulli",link="probit",
-corstr="unstr",iprint=TRUE)
 }
-}
+
 
 \keyword{regression}
 
