@@ -45,9 +45,7 @@ Aristidis K. Nikoloulopoulos \email{A.Nikoloulopoulos@uea.ac.uk}\cr
 Harry Joe \email{harry.joe@ubc.ca}
 }
 \seealso{
-  \code{\link{iee}},
-  \code{\link{cl1}},
-  \code{\link{bcl}}
+  \code{\link{iee}}
 }
 \keyword{models}
 

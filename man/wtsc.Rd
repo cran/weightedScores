@@ -1,10 +1,13 @@
 \name{wtsc}
 \alias{wtsc}
+\alias{wtsc.ord}
 \title{THE WEIGHTED SCORES EQUATIONS WITH INPUTS OF THE WEIGHT MATRICES AND THE DATA}
 \description{The weighted scores equations with inputs of the weight matrices and
     the data. }
 \usage{
-wtsc(param,WtScMat,xdat,ydat,id,tvec,margmodel,link)}
+wtsc(param,WtScMat,xdat,ydat,id,tvec,margmodel,link)
+wtsc.ord(param,WtScMat,xdat,ydat,id,tvec,link)
+}
 \arguments{
  \item{param}{The vector of regression and not regression parameters.}
   \item{WtScMat}{A list containing the following components.
@@ -16,7 +19,7 @@ wtsc(param,WtScMat,xdat,ydat,id,tvec,margmodel,link)}
   depend on the  times of observation for that unit (\eqn{j_i}) and will have
   number of rows \eqn{j_i}, each row corresponding to one of the \eqn{j_i} elements
   of \eqn{y_i} and \eqn{p} columns where \eqn{p} is the number of covariates including
-  the unit first column  to account for the intercept. This xdat matrix is
+  the unit first column  to account for the intercept (except for ordinal regression where there is no intercept). This xdat matrix is
   of dimension \eqn{(N\times p),} where \eqn{N =\sum_{i=1}^n j_i} is the total
   number of observations from all units.}
   \item{ydat}{\eqn{(y_1 , y_2 , \ldots , y_n  )^\top}, where
@@ -38,7 +41,7 @@ wtsc(param,WtScMat,xdat,ydat,id,tvec,margmodel,link)}
   Choices are \dQuote{log} for the log link function, \dQuote{logit} for 
   the logit link function, and \dQuote{probit} for 
   the probit link function. 
-  However, this is an optional argument and needs to be defined only for probit regression.}
+}
 }
 \details{The weighted scores estimating equations, with
 \eqn{W_{i,\rm working}} based on a working discretized MVN, have the form:
@@ -50,12 +53,22 @@ where \eqn{ W_{i,\rm working}^{-1}=\Delta_i\Omega_{i,\rm working}^{-1}=
 the covariance matrix of \eqn{ s_i( a)} computed from the
 fitted discretized MVN model with estimated parameters \eqn{{\tilde a},
 {\tilde R}}.
+
+Note that \code{wtsc.ord} is a variant of the code for ordinal (probit and logistic) regression.
 }
 \value{The weighted scores equations.}
 \references{
 Nikoloulopoulos, A.K., Joe, H. and Chaganty, N.R. (2011)
 Weighted scores method for regression models with dependent data.
 \emph{Biostatistics}, \bold{12}, 653--665.
+
+Nikoloulopoulos, A.K. (2015a)
+Correlation structure and variable selection in generalized estimating equations via composite likelihood information criteria.
+\emph{Arxiv e-prints}.
+
+Nikoloulopoulos, A.K. (2015b)
+Weighted scores estimating equations for longitudinal  ordinal data.
+\emph{Arxiv e-prints}.
 }
 \seealso{
   \code{\link{solvewtsc}},

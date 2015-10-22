@@ -1,8 +1,13 @@
 bcl		BCL
 cl1		CL1
-weightMat		weight matrices
-godambe		asymptotic covariance matrix
-iee		independent estimating equations 
-solvewtsc	nonlinear system solving
-wtsc		weighted scores equations 
-wtsc.wrapper		weighted scores wrapper
+weightMat		Weight Matrices
+godambe		Asymptotic Covariance Matrix of the Weighted Scores Estimates
+iee		Independent Estimating Equations 
+solvewtsc	Nonlinear System Solving
+wtsc		Weighted Scores Equations 
+wtsc.wrapper		Weighted Scores Wrapper
+exchmvn                 Exchangeable (Positive) Multivariate Normal
+mvn.deriv               Derivatives of Multivariate Normal Rectangle
+                        Probabilities
+mvnapp                  MVN Rectangle Probabilities
+clic Composite Likelihood Information Criteria

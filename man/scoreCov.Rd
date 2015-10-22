@@ -1,10 +1,13 @@
 \name{scoreCov}
 \alias{scoreCov}
+\alias{scoreCov.ord}
 \title{COVARIANCE MATRIX OF THE UNIVARIATE SCORES}
 \description{
 Covariance matrix of the univariates scores.}
 \usage{
-scoreCov(scnu,scgam,pmf,index,margmodel)}
+scoreCov(scnu,scgam,pmf,index,margmodel)
+scoreCov.ord(scgam,pmf,index)
+}
 \arguments{
   \item{scnu}{The matrix of the score functions with respect to \eqn{\nu}.}
   \item{scgam}{The matrix of the score functions with respect to \eqn{\gamma}.}
@@ -18,14 +21,17 @@ scoreCov(scnu,scgam,pmf,index,margmodel)}
   }
 \details{The covariance matrix \eqn{\Omega_i} of \eqn{ s_i(a)} computed from the
 fitted discretized MVN model with estimated parameters \eqn{{\tilde a},
-{\tilde R}}.}
+{\tilde R}}.
+
+Note that \code{scoreCov.ord} is a variant of the code for ordinal (probit and logistic) regression.
+
+}
 \value{Covariance matrix of the univariates scores \eqn{\Omega_i}.}
 \author{
 Aristidis K. Nikoloulopoulos \email{A.Nikoloulopoulos@uea.ac.uk}\cr
 Harry Joe \email{harry.joe@ubc.ca}
 }
 \seealso{
- \code{\link{scoreCov}},
  \code{\link{approxbvncdf}}
 }
 

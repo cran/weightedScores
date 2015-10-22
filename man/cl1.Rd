@@ -1,21 +1,23 @@
 \name{cl1}
 \alias{cl1}
+\alias{cl1.ord}
 \title{OPTIMIZATION ROUTINE FOR BIVARIATE COMPOSITE LIKELIHOOD FOR MVN COPULA}
 \description{
 Optimization routine for bivariate composite likelihood for MVN copula.
 }
 \usage{
 cl1(b,gam,xdat,ydat,id,tvec,margmodel,corstr,link)
+cl1.ord(b,gam,xdat,ydat,id,tvec,corstr,link)
 }
 \arguments{
   \item{b}{The regression coefficients.}
-  \item{gam}{The parameter \eqn{\gamma} of negative binomial distribution. \eqn{\gamma} is NULL for Poisson and binary regression.}
+  \item{gam}{The uinivariate parameters that are not regression coefficients. That is the parameter \eqn{\gamma} of negative binomial distribution or  the \eqn{q}-dimensional vector of the univariate cutpoints of ordinal model. \eqn{\gamma} is NULL for Poisson and binary regression.}
   \item{xdat}{\eqn{(\mathbf{x}_1 , \mathbf{x}_2 , \ldots , \mathbf{x}_n )^\top}, 
   where the matrix \eqn{\mathbf{x}_i,\,i=1,\ldots,n} for a given unit will
   depend on the  times of observation for that unit (\eqn{j_i}) and will have
   number of rows \eqn{j_i}, each row corresponding to one of the \eqn{j_i} elements
   of \eqn{y_i} and \eqn{p} columns where \eqn{p} is the number of covariates including
-  the unit first column  to account for the intercept. This xdat matrix is
+  the unit first column  to account for the intercept (except for ordinal regression where there is no intercept). This xdat matrix is
   of dimension \eqn{(N\times p),} where \eqn{N =\sum_{i=1}^n j_i} is the total
   number of observations from all units.}
   \item{ydat}{\eqn{(y_1 , y_2 , \ldots , y_n )^\top}, where
@@ -40,14 +42,16 @@ cl1(b,gam,xdat,ydat,id,tvec,margmodel,corstr,link)
   Choices are \dQuote{log} for the log link function, \dQuote{logit} for 
   the logit link function, and \dQuote{probit} for 
   the probit link function. 
-  However, this is an optional argument and needs to be defined only for probit regression.}
+}
 }
 \details{The
 CL1 composite likelihood method in Zhao and Joe (2005). The
 univariate parameters  are estimated
 from the sum of univariate marginal log-likelihoods and then the dependence
 parameters are estimated from the sum of bivariate marginal log-likelihoods
-with the univariate parameters fixed from the first step.
+with the univariate parameters fixed from the first step. 
+
+Note that \code{bcl.ord} is a variant of the code for ordinal (probit and logistic) regression.
 }
 \value{
 A list containing the following components:
@@ -59,10 +63,6 @@ CL1 estimates.}
  same as in \code{\link{nlm}}.}
 }
 \references{
-Nikoloulopoulos, A.K., Joe, H. and Chaganty, N.R. (2011)
-Weighted scores method for regression models with dependent data.
-\emph{Biostatistics}, \bold{12}, 653--665.
-
 Zhao, Y. and Joe, H. (2005)
 Composite likelihood estimation in multivariate data analysis.
 \emph{The Canadian Journal of Statistics},  \bold{33}, 335--356.
@@ -76,7 +76,9 @@ Harry Joe \email{harry.joe@ubc.ca}
   \code{\link{iee}}
 }
 \examples{
-
+################################################################################
+#                      NB1 regression for count data
+################################################################################
 ################################################################################
 #                      read and set up data set
 ################################################################################
@@ -108,7 +110,46 @@ print(c(i.est$reg,i.est$gam))
 est.rho<-cl1(b=i.est$reg,gam=i.est$gam,xdat,ydat,id,tvec,margmodel,corstr)
 cat("\nest.rho: CL1 estimates\n")
 print(est.rho$e)
-
+################################################################################
+#                         Ordinal regression 
+################################################################################
+################################################################################
+#                      read and set up data set
+################################################################################
+\dontrun{
+data(arthritis)
+nn=nrow(arthritis)
+bas2<-bas3<-bas4<-bas5<-rep(0,nn)
+bas2[arthritis$b==2]<-1
+bas3[arthritis$b==3]<-1
+bas4[arthritis$b==4]<-1
+bas5[arthritis$b==5]<-1
+t2<-t3<-rep(0,nn)
+t2[arthritis$ti==3]<-1
+t3[arthritis$ti==5]<-1
+xdat=cbind(t2,t3,arthritis$trt,bas2,bas3,bas4,bas5,arthritis$age) 
+ydat=arthritis$y
+id<-arthritis$id
+#time
+tvec<-arthritis$time
+################################################################################
+#                      select the link
+################################################################################
+link="logit"
+################################################################################
+#                      select the  correlation structure
+################################################################################
+corstr="exch"
+################################################################################
+#                      perform CL1 estimation
+################################################################################
+i.est<-iee.ord(xdat,ydat,link)
+cat("\niest: IEE estimates\n")
+print(c(i.est$reg,i.est$gam))
+est.rho<-cl1.ord(b=i.est$reg,gam=i.est$gam,xdat,ydat,id,tvec,corstr,link)
+cat("\nest.rho: CL1 estimates\n")
+print(est.rho$e)
+}
 }
 
 

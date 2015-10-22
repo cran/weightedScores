@@ -1,23 +1,24 @@
 \name{bcl}
 \alias{bcl}
-\title{BIVARIATE COMPOSITE LIKELIHOOD FOR MULTIVARIATE NORMAL COPULA WITH POISSON/BINARY/NB REGRESSION}
+\alias{bcl.ord}
+\title{BIVARIATE COMPOSITE LIKELIHOOD FOR MULTIVARIATE NORMAL COPULA WITH CATEGORICAL AND COUNT REGRESSION}
 \description{
-Bivariate composite likelihood for multivariate normal copula with Poisson, binary, or negative binomial
-regression.
+Bivariate composite likelihood for multivariate normal copula with categorical and count regression.
 }
 \usage{
 bcl(r,b,gam,xdat,ydat,id,tvec,margmodel,corstr,link)
+bcl.ord(r,b,gam,xdat,ydat,id,tvec,corstr,link)
 }
 \arguments{
   \item{r}{The vector of normal copula parameters.}
   \item{b}{The regression coefficients.}
-  \item{gam}{The parameter \eqn{\gamma} of negative binomial distribution. \eqn{\gamma} is NULL for Poisson and binary regression.}
+  \item{gam}{The uinivariate parameters that are not regression coefficients. That is the parameter \eqn{\gamma} of negative binomial distribution or  the \eqn{q}-dimensional vector of the univariate cutpoints of ordinal model. \eqn{\gamma} is NULL for Poisson and binary regression.}
   \item{xdat}{\eqn{(\mathbf{x}_1 , \mathbf{x}_2 , \ldots , \mathbf{x}_n )^\top}, where 
   the matrix \eqn{\mathbf{x}_i,\,i=1,\ldots,n} for a given unit will
   depend on the  times of observation for that unit (\eqn{j_i}) and will have
   number of rows \eqn{j_i}, each row corresponding to one of the \eqn{j_i} elements
   of \eqn{y_i} and \eqn{p} columns where \eqn{p} is the number of covariates including
-  the unit first column  to account for the intercept. This xdat matrix is
+  the unit first column  to account for the intercept (except for ordinal regression where there is no intercept). This xdat matrix is
   of dimension \eqn{(N\times p),} where \eqn{N =\sum_{i=1}^n j_i} is the total
   number of observations from all units.}
   \item{ydat}{\eqn{(y_1 , y_2 , \ldots , y_n  )^\top}, where
@@ -31,7 +32,7 @@ bcl(r,b,gam,xdat,ydat,id,tvec,margmodel,corstr,link)
   \item{id}{An index for individuals or clusters.}
   \item{tvec}{A vector with the time indicator of individuals or clusters.}
   \item{margmodel}{
-  Indicates the marginal model.
+  Indicates the marginal model. 
   Choices are \dQuote{poisson} for Poisson, \dQuote{bernoulli} for Bernoulli, 
   and  \dQuote{nb1} , \dQuote{nb2} for the NB1 and NB2 parametrization 
   of negative binomial in Cameron and Trivedi (1998).}
@@ -41,12 +42,15 @@ bcl(r,b,gam,xdat,ydat,id,tvec,margmodel,corstr,link)
   \item{link}{The link function. 
   Choices are \dQuote{log} for the log link function, \dQuote{logit} for 
   the logit link function, and \dQuote{probit} for 
-  the probit link function. 
-  However, this is an optional argument and needs to be defined only for probit regression.}
+  the probit link function.}
   }
+\details{The
+CL1 composite likelihood in Zhao and Joe (2005). That is the sum of bivariate marginal log-likelihoods.
+
+\code{bcl.ord} is a variant of the code for ordinal (probit and logistic) regression.}
 \value{
-The negative bivariate composite likelihood for multivariate normal copula with Poisson, binary, or negative
-binomial regression.
+The negative bivariate composite likelihood for multivariate normal copula with Poisson or binary or negative
+binomial or ordinal regression.
 }
 \references{
 Zhao, Y. and Joe, H. (2005)
@@ -57,9 +61,6 @@ Cameron, A. C. and Trivedi, P. K. (1998)
 \emph{Regression Analysis of Count Data.}
 Cambridge: Cambridge University Press.
 
-Nikoloulopoulos, A.K., Joe, H. and Chaganty, N.R. (2011)
-Weighted scores method for regression models with dependent data.
-\emph{Biostatistics}, \bold{12}, 653--665.
 }
 \author{
 Aristidis K. Nikoloulopoulos \email{A.Nikoloulopoulos@uea.ac.uk}\cr

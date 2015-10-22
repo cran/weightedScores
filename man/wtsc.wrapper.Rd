@@ -1,16 +1,19 @@
 \name{wtsc.wrapper}
 \alias{wtsc.wrapper}
+\alias{wtsc.ord.wrapper}
 \title{THE WEIGHTED SCORES METHOD  WITH INPUTS OF THE DATA}
 \description{The weighted scores method with inputs of the data.}
 \usage{
-wtsc.wrapper(xdat,ydat,id,tvec,margmodel,corstr,link,iprint=FALSE)}
+wtsc.wrapper(xdat,ydat,id,tvec,margmodel,corstr,link,iprint=FALSE)
+wtsc.ord.wrapper(xdat,ydat,id,tvec,corstr,link,iprint=FALSE)
+}
 \arguments{
   \item{xdat}{\eqn{(\mathbf{x}_1 ,  \mathbf{x}_2 , \ldots ,
   \mathbf{x}_n )^\top}, where the matrix \eqn{\mathbf{x}_i,\,i=1,\ldots,n} for a given unit will
   depend on the  times of observation for that unit (\eqn{j_i}) and will have
   number of rows \eqn{j_i}, each row corresponding to one of the \eqn{j_i} elements
   of \eqn{y_i} and \eqn{p} columns where \eqn{p} is the number of covariates including
-  the unit first column  to account for the intercept. This xdat matrix is
+  the unit first column  to account for the intercept (except for ordinal regression where there is no intercept). This xdat matrix is
   of dimension \eqn{(N\times p),} where \eqn{N =\sum_{i=1}^n j_i} is the total
   number of observations from all units.}
   \item{ydat}{\eqn{(y_1 , y_2 , \ldots , y_n  )^\top},
@@ -34,8 +37,7 @@ wtsc.wrapper(xdat,ydat,id,tvec,margmodel,corstr,link,iprint=FALSE)}
   \item{link}{The link function. 
   Choices are \dQuote{log} for the log link function, \dQuote{logit} for 
   the logit link function, and \dQuote{probit} for 
-  the probit link function. 
-  However, this is an optional argument and needs to be defined only for probit regression.}
+  the probit link function.}
   \item{iprint}{Indicates printing of some intermediate results, default FALSE}
   }
 \details{This wrapper functions handles all the steps to obtain the weighted
@@ -55,6 +57,14 @@ parameters.}
 Nikoloulopoulos, A.K., Joe, H. and Chaganty, N.R. (2011)
 Weighted scores method for regression models with dependent data.
 \emph{Biostatistics}, \bold{12}, 653--665.
+
+Nikoloulopoulos, A.K. (2015a)
+Correlation structure and variable selection in generalized estimating equations via composite likelihood information criteria.
+\emph{Arxiv e-prints}.
+
+Nikoloulopoulos, A.K. (2015b)
+Weighted scores estimating equations for longitudinal  ordinal data.
+\emph{Arxiv e-prints}.
 }
 \author{
 Aristidis K. Nikoloulopoulos \email{A.Nikoloulopoulos@uea.ac.uk}\cr
@@ -84,6 +94,7 @@ id<-childvisit$id
 tvec<-childvisit$q
 ################################################################################
 out<-wtsc.wrapper(xdat,ydat,id,tvec,margmodel="nb1",corstr="ar",iprint=TRUE)
+\dontrun{
 ################################################################################
 #                        transform to binary responses                         #
 ################################################################################
@@ -92,8 +103,13 @@ y2[ydat>0]<-1
 ################################################################################
 out<-wtsc.wrapper(xdat,y2,id,tvec,margmodel="bernoulli",link="probit",
 corstr="exch",iprint=TRUE)
+################################################################################
+#                        via the code for ordinal                             #
+################################################################################
+out<-wtsc.ord.wrapper(xdat[,-1],2-y2,id,tvec,link="probit",
+corstr="exch",iprint=TRUE)
 }
-
+}
 
 \keyword{regression}
 

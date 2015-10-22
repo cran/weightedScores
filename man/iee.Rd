@@ -1,10 +1,11 @@
 \name{iee}
 \alias{iee}
-\title{INDEPENDENT ESTIMATING EQUATIONS FOR BINARY/POISSON/NEGATIVE BINOMIAL REGRESSION}
+\title{INDEPENDENT ESTIMATING EQUATIONS FOR BINARY AND COUNT REGRESSION}
 \description{
-Independent estimating equations for binary, Poisson or negative binomial regression.}
+Independent estimating equations for binary and count regression.}
 \usage{
-iee(xdat,ydat,margmodel,link) }
+iee(xdat,ydat,margmodel,link) 
+}
 \arguments{
   \item{xdat}{\eqn{(\mathbf{x}_1 ,  \mathbf{x}_2 , \ldots ,
   \mathbf{x}_n )^\top}, where the matrix \eqn{\mathbf{x}_i,\,i=1,\ldots,n} for a given unit will
@@ -33,10 +34,12 @@ iee(xdat,ydat,margmodel,link) }
   the probit link function.}
   }
 \details{The univariate parameters  are
-estimated from the sum of univariate marginal log-likelihoods.}
+estimated from the sum of univariate marginal log-likelihoods.
+
+}
 \value{A list containing the following components:
 \item{coef}{The vector with the estimated regression parameters.}
-\item{gam}{The estimate of \eqn{\gamma} parameter of negative binomial distribution. This is NULL for Poisson and binary regression.} }
+\item{gam}{The vector with the estimated parameters that  are not regression parameters. This is NULL for Poisson and binary regression.} }
 \references{
 Cameron, A. C. and Trivedi, P. K. (1998)
 \emph{Regression Analysis of Count Data.}
@@ -48,8 +51,7 @@ Harry Joe \email{harry.joe@ubc.ca}
 }
 
 \seealso{
-  \code{\link{bcl}},
-  \code{\link{cl1}}
+  \code{\link{marglik}}
 }
 
 \examples{
@@ -76,7 +78,6 @@ margmodel="bernoulli"
 i.est<-iee(xdat,ydat,margmodel)
 cat("\niest: IEE estimates\n")
 print(c(i.est$reg,i.est$gam))
-
 }
 \keyword{regression}
 

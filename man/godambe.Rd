@@ -1,9 +1,12 @@
 \name{godambe}
 \alias{godambe}
+\alias{godambe.ord}
 \title{INVERSE GODAMBE MATRIX}
 \description{Inverse Godambe matrix.}
 \usage{
-godambe(param,WtScMat,xdat,ydat,id,tvec,margmodel,link)}
+godambe(param,WtScMat,xdat,ydat,id,tvec,margmodel,link)
+godambe.ord(param,WtScMat,xdat,ydat,id,tvec,link)
+}
 \arguments{
   \item{param}{The weighted scores estimates of regression and not regression parameters.}
   \item{WtScMat}{A list containing the following components.
@@ -15,7 +18,7 @@ godambe(param,WtScMat,xdat,ydat,id,tvec,margmodel,link)}
   depend on the  times of observation for that unit (\eqn{j_i}) and will have
   number of rows \eqn{j_i}, each row corresponding to one of the \eqn{j_i} elements
   of \eqn{y_i} and \eqn{p} columns where \eqn{p} is the number of covariates including
-  the unit first column  to account for the intercept. This xdat matrix is
+  the unit first column  to account for the intercept  (except for ordinal regression where there is no intercept). This xdat matrix is
   of dimension \eqn{(N\times p),} where \eqn{N =\sum_{i=1}^n j_i} is the total
   number of observations from all units.}
   \item{ydat}{\eqn{(y_1 , y_2 , \ldots , y_n  )^\top}, where
@@ -36,12 +39,10 @@ godambe(param,WtScMat,xdat,ydat,id,tvec,margmodel,link)}
   \item{link}{The link function. 
   Choices are \dQuote{log} for the log link function, \dQuote{logit} for 
   the logit link function, and \dQuote{probit} for 
-  the probit link function. 
-  However, this is an optional argument and needs to be defined only for probit regression.}
+  the probit link function. }
 }
 \details{If the \eqn{W_{i,\rm working}} are assumed fixed for the
-second stage of solving the weighted scores equations in
-Nikoloulopoulos et al. (2011)
+second stage of solving the weighted scores equations 
 \deqn{
  g_1= g_1(a)=\sum_{i=1}^n X_i^T\, W_{i,\rm working}^{-1}\, s_i( a)=0,
 } the asymptotic covariance matrix of the
@@ -60,12 +61,26 @@ with
 where \eqn{\Omega_{i,\rm true}} is the true covariance matrix of \eqn{s_i(a)}.
 The inverse of \eqn{V_1} is known as
 Godambe information matrix (Godambe, 1991).
+
+Note that \code{godambe.ord} is a variant of the code for ordinal (probit and logistic) regression.
 }
 \value{The inverse Godambe matrix.}
 \references{
 Godambe, V. P. (1991)
 \emph{Estimating Functions}.
 Oxford: Oxford University Press
+
+Nikoloulopoulos, A.K., Joe, H. and Chaganty, N.R. (2011)
+Weighted scores method for regression models with dependent data.
+\emph{Biostatistics}, \bold{12}, 653--665.
+
+Nikoloulopoulos, A.K. (2015a)
+Correlation structure and variable selection in generalized estimating equations via composite likelihood information criteria.
+\emph{Arxiv e-prints}.
+
+Nikoloulopoulos, A.K. (2015b)
+Weighted scores estimating equations for longitudinal  ordinal data.
+\emph{Arxiv e-prints}.
 }
 \author{
 Aristidis K. Nikoloulopoulos \email{A.Nikoloulopoulos@uea.ac.uk}\cr
@@ -80,7 +95,9 @@ Harry Joe \email{harry.joe@ubc.ca}
 }
 
 \examples{
-
+################################################################################
+#                           Poisson regression 
+################################################################################
 ################################################################################
 #                      read and set up the data set
 ################################################################################
@@ -132,7 +149,66 @@ acov<-godambe(ws$r,WtScMat,xdat,ydat,id,tvec,margmodel)
 cat("\nacov: inverse Godambe matrix with W based on first-stage wt
 matrices\n")
 print(acov)
-
+################################################################################
+#                         Ordinal regression 
+################################################################################
+################################################################################
+#                      read and set up data set
+################################################################################
+\dontrun{
+data(arthritis)
+nn=nrow(arthritis)
+bas2<-bas3<-bas4<-bas5<-rep(0,nn)
+bas2[arthritis$b==2]<-1
+bas3[arthritis$b==3]<-1
+bas4[arthritis$b==4]<-1
+bas5[arthritis$b==5]<-1
+t2<-t3<-rep(0,nn)
+t2[arthritis$ti==3]<-1
+t3[arthritis$ti==5]<-1
+xdat=cbind(t2,t3,arthritis$trt,bas2,bas3,bas4,bas5,arthritis$age) 
+ydat=arthritis$y
+id<-arthritis$id
+#time
+tvec<-arthritis$time
+################################################################################
+#                      select the link
+################################################################################
+link="probit"
+################################################################################
+#                      select the  correlation structure
+################################################################################
+corstr="exch"
+################################################################################
+#                      perform CL1 estimation
+################################################################################
+i.est<-iee.ord(xdat,ydat,link)
+cat("\niest: IEE estimates\n")
+print(c(i.est$reg,i.est$gam))
+est.rho<-cl1.ord(b=i.est$reg,gam=i.est$gam,xdat,ydat,id,tvec,corstr,link)
+cat("\nest.rho: CL1 estimates\n")
+print(est.rho$e)
+################################################################################
+#                      obtain the fixed weight matrices
+################################################################################
+WtScMat<-weightMat.ord(b=i.est$reg,gam=i.est$gam,rh=est.rho$e,xdat,ydat,id,
+tvec,corstr,link)
+################################################################################
+#                      obtain the weighted scores estimates
+################################################################################
+# solve the nonlinear system of equations
+ws<-solvewtsc.ord(start=c(i.est$reg,i.est$gam),WtScMat,xdat,ydat,id,
+tvec,link)
+cat("ws=parameter estimates\n")
+print(ws$r)
+################################################################################
+#                      obtain the inverse Godambe matrix
+################################################################################
+acov<-godambe.ord(ws$r,WtScMat,xdat,ydat,id,tvec,link)
+cat("\nacov: inverse Godambe matrix with W based on first-stage wt
+matrices\n")
+print(acov)
+}
 }
 
 \keyword{regression}

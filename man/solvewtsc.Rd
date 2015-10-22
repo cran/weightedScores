@@ -1,10 +1,13 @@
 \name{solvewtsc}
 \alias{solvewtsc}
+\alias{solvewtsc.ord}
 \title{SOLVING THE WEIGHTED SCORES EQUATIONS WITH INPUTS OF THE WEIGHT MATRICES AND THE DATA}
 \description{Solving the weighted scores equations with inputs of the weight matrices
   and the data.}
 \usage{
-solvewtsc(start,WtScMat,xdat,ydat,id,tvec,margmodel,link)}
+solvewtsc(start,WtScMat,xdat,ydat,id,tvec,margmodel,link)
+solvewtsc.ord(start,WtScMat,xdat,ydat,id,tvec,link)
+}
 \arguments{
  \item{start}{A starting value of the vector of regression
  and not regression parameters. The CL1 estimates of regression and not regression parameters 
@@ -18,7 +21,7 @@ solvewtsc(start,WtScMat,xdat,ydat,id,tvec,margmodel,link)}
   depend on the  times of observation for that unit (\eqn{j_i}) and will have
   number of rows \eqn{j_i}, each row corresponding to one of the \eqn{j_i} elements
   of \eqn{y_i} and \eqn{p} columns where \eqn{p} is the number of covariates including
-  the unit first column  to account for the intercept. This xdat matrix is
+  the unit first column  to account for the intercept (except for ordinal regression where there is no intercept). This xdat matrix is
   of dimension \eqn{(N\times p),} where \eqn{N =\sum_{i=1}^n j_i} is the total
   number of observations from all units.}
   \item{ydat}{\eqn{(y_1 , y_2 , \ldots , y_n  )^\top}, where
@@ -40,7 +43,7 @@ solvewtsc(start,WtScMat,xdat,ydat,id,tvec,margmodel,link)}
   Choices are \dQuote{log} for the log link function, \dQuote{logit} for 
   the logit link function, and \dQuote{probit} for 
   the probit link function. 
-  However, this is an optional argument and needs to be defined only for probit regression.}
+}
 }
 \details{Obtain robust estimates \eqn{{\hat a}} of the univariate parameters
 solving the weighted scores equation,
@@ -52,6 +55,8 @@ where \eqn{ W_{i,\rm working}^{-1}=\Delta_i\Omega_{i,\rm working}^{-1}=
 the covariance matrix of \eqn{s_i(a)} computed from the
 fitted discretized MVN model with estimated parameters \eqn{{\tilde a}, {\tilde
 R}}.  A reliable non-linear system solver is used.
+
+Note that \code{solvewtsc.ord} is a variant of the code for ordinal (probit and logistic) regression.
 }
 \value{A list containing the following components:
 \item{root}{The weighted scores estimates.}
@@ -63,6 +68,14 @@ R}}.  A reliable non-linear system solver is used.
 Nikoloulopoulos, A.K., Joe, H. and Chaganty, N.R. (2011)
 Weighted scores method for regression models with dependent data.
 \emph{Biostatistics}, \bold{12}, 653--665.
+
+Nikoloulopoulos, A.K. (2015a)
+Correlation structure and variable selection in generalized estimating equations via composite likelihood information criteria.
+\emph{Arxiv e-prints}.
+
+Nikoloulopoulos, A.K. (2015b)
+Weighted scores estimating equations for longitudinal  ordinal data.
+\emph{Arxiv e-prints}.
 }
 \author{
 Aristidis K. Nikoloulopoulos \email{A.Nikoloulopoulos@uea.ac.uk}\cr
@@ -76,7 +89,9 @@ Harry Joe \email{harry.joe@ubc.ca}
 }
 
 \examples{
-
+################################################################################
+#                           NB2 regression 
+################################################################################
 ################################################################################
 #                      read and set up the data set
 ################################################################################
@@ -98,7 +113,7 @@ margmodel="nb2"
 ################################################################################
 #                      select the  correlation structure
 ################################################################################
-corstr="ar"
+corstr="exch"
 ################################################################################
 #                      perform CL1 estimation
 ################################################################################
@@ -121,6 +136,59 @@ ws<-solvewtsc(start=c(i.est$reg,i.est$gam),WtScMat,xdat,ydat,id,
 tvec,margmodel,link)
 cat("ws=parameter estimates\n")
 print(ws$r)
+################################################################################
+#                         Ordinal regression 
+################################################################################
+################################################################################
+#                      read and set up data set
+################################################################################
+\dontrun{
+data(arthritis)
+nn=nrow(arthritis)
+bas2<-bas3<-bas4<-bas5<-rep(0,nn)
+bas2[arthritis$b==2]<-1
+bas3[arthritis$b==3]<-1
+bas4[arthritis$b==4]<-1
+bas5[arthritis$b==5]<-1
+t2<-t3<-rep(0,nn)
+t2[arthritis$ti==3]<-1
+t3[arthritis$ti==5]<-1
+xdat=cbind(t2,t3,arthritis$trt,bas2,bas3,bas4,bas5,arthritis$age) 
+ydat=arthritis$y
+id<-arthritis$id
+#time
+tvec<-arthritis$time
+################################################################################
+#                      select the link
+################################################################################
+link="probit"
+################################################################################
+#                      select the  correlation structure
+################################################################################
+corstr="exch"
+################################################################################
+#                      perform CL1 estimation
+################################################################################
+i.est<-iee.ord(xdat,ydat,link)
+cat("\niest: IEE estimates\n")
+print(c(i.est$reg,i.est$gam))
+est.rho<-cl1.ord(b=i.est$reg,gam=i.est$gam,xdat,ydat,id,tvec,corstr,link)
+cat("\nest.rho: CL1 estimates\n")
+print(est.rho$e)
+################################################################################
+#                      obtain the fixed weight matrices
+################################################################################
+WtScMat<-weightMat.ord(b=i.est$reg,gam=i.est$gam,rh=est.rho$e,xdat,ydat,id,
+tvec,corstr,link)
+################################################################################
+#                      obtain the weighted scores estimates
+################################################################################
+# solve the nonlinear system of equations
+ws<-solvewtsc.ord(start=c(i.est$reg,i.est$gam),WtScMat,xdat,ydat,id,
+tvec,link)
+cat("ws=parameter estimates\n")
+print(ws$r)
+}
 }
 
 
