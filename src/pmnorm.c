@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "mprobit.h"
+#define M 20
+#define N 300
 
 /* Schervish, m.j. [1984]. multivariate normal probabilities 
    with error bound. {Appl. Statist.  33} 81-94. */
@@ -485,3 +486,5 @@ double f5(double x, double y)
 double f6(double x, double y) 
 { return fabs(-15. + x*x* (45. - x*x* (-15. + x*x))) / pow(y, 6.);}
 
+#undef M
+#undef N

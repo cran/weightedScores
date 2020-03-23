@@ -3,7 +3,8 @@
 #include <math.h>
 #include <R.h>
 #include <Rmath.h>
-#include "mprobit.h"
+#define M 20
+#define N 300
 
 
 void mvn1(int m, double w[], double x[], double r[][M], int nsim, double eps, 
@@ -542,4 +543,5 @@ else {
     PutRNGstate();
 }
 
-
+#undef M
+#undef N

@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "mprobit.h"
+#define M 20
+#define N 300
 
 /* check for positive definiteness of a symmetric matrix */
 #ifdef MAIN2
@@ -64,3 +65,5 @@ int pdef(double a[][M], double l[][M], int n, double toler)
   return 1;
 }
 
+#undef M
+#undef N

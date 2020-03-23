@@ -116,7 +116,7 @@ print(est.rho$e)
 ################################################################################
 #                      read and set up data set
 ################################################################################
-\dontrun{
+\donttest{
 data(arthritis)
 nn=nrow(arthritis)
 bas2<-bas3<-bas4<-bas5<-rep(0,nn)

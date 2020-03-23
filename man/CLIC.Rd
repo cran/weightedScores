@@ -154,13 +154,18 @@ Godambe, V. P. (1991)
 \emph{Estimating Functions}.
 Oxford: Oxford University Press
 
-Nikoloulopoulos, A.K. (2015a)
-Correlation structure and variable selection in generalized estimating equations via composite likelihood information criteria.
-\emph{Arxiv e-prints}.
+Nikoloulopoulos, A.K., Joe, H. and Chaganty, N.R. (2011)
+Weighted scores method for regression models with dependent data.
+\emph{Biostatistics}, \bold{12}, 653--665. \doi{10.1093/biostatistics/kxr005}.
 
-Nikoloulopoulos, A.K. (2015b)
-Weighted scores estimating equations for longitudinal  ordinal data.
-\emph{Arxiv e-prints}.
+Nikoloulopoulos, A.K. (2016)
+Correlation structure and variable selection in generalized estimating equations via composite likelihood information criteria.
+\emph{Statistics in Medicine}, \bold{35}, 2377--2390. \doi{10.1002/sim.6871}.
+
+Nikoloulopoulos, A.K. (2017)
+Weighted scores method for longitudinal  ordinal data.
+\emph{Arxiv e-prints}, <arXiv:1510.07376>. \url{https://arxiv.org/abs/1510.07376}.
+
 
 Varin, C. and Vidoni, P. (2005).
 A note on composite likelihood inference and model selection.
@@ -180,6 +185,7 @@ Aristidis K. Nikoloulopoulos \email{A.Nikoloulopoulos@uea.ac.uk}\cr
 }
 
 \examples{
+\donttest{
   ################################################################################
   #                           Binary regression 
   ################################################################################
@@ -213,13 +219,11 @@ Aristidis K. Nikoloulopoulos \email{A.Nikoloulopoulos@uea.ac.uk}\cr
   i.est<-iee.ord(xdat,ydat,link)
   cat("\niest: IEE estimates\n")
   print(c(i.est$reg,i.est$gam))
-  # est.rho<-cl1.ord(b=i.est$reg,gam=i.est$gam,xdat,ydat,id,tvec,corstr,link)
-  # cat("\nest.rho: CL1 estimates\n")
-  # print(est.rho$e)
-  # [1] 0.1961
-  # cat("\nest.rho: negative CL1 log-likelhood\n")
-  # print(est.rho$m)
-  # [1] 576.5246
+  est.rho<-cl1.ord(b=i.est$reg,gam=i.est$gam,xdat,ydat,id,tvec,corstr,link)
+  cat("\nest.rho: CL1 estimates\n")
+  print(est.rho$e)
+  cat("\nest.rho: negative CL1 log-likelhood\n")
+  print(est.rho$m)
   ################################################################################
   #                      obtain the fixed weight matrices
   ################################################################################
@@ -228,9 +232,9 @@ Aristidis K. Nikoloulopoulos \email{A.Nikoloulopoulos@uea.ac.uk}\cr
   ################################################################################
   #                      obtain the CL1 information criteria
   ################################################################################
-  out<-clic1dePar(nbcl=576.5246,r=0.1961,i.est$r,i.est$g,xdat,id,tvec,corstr,WtScMat,link)
+  out<-clic1dePar(nbcl=est.rho$m,r=est.rho$e,i.est$r,i.est$g,xdat,id,tvec,corstr,WtScMat,link,1)
 }
-
+}
 
 \keyword{regression}
 

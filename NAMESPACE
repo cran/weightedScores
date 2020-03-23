@@ -3,7 +3,6 @@ useDynLib(weightedScores)
 export(bcl, cl1, weightMat, godambe, iee, solvewtsc, scoreCov, wtsc.wrapper,wtsc.ord.wrapper)
 export(bcl.ord, cl1.ord, weightMat.ord, godambe.ord, iee.ord, solvewtsc.ord, scoreCov.ord,clic)
 export(clic1dePar,approxbvncdf, dmargmodel, pmargmodel,dmargmodel.ord, pmargmodel.ord) 
-export(exchmvn, exchmvn.deriv.margin, exchmvn.deriv.rho)
 export(mvnapp, mvn.deriv.margin, mvn.deriv.rho)
 
 import(mvtnorm)

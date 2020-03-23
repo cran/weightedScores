@@ -62,9 +62,6 @@ Negative binomial and mixed Poisson regression.
 \emph{The Canadian Journal
 of Statistics}, \bold{15}, 209--225.
 
-Nikoloulopoulos, A.K. (2015b)
-Weighted scores estimating equations for longitudinal  ordinal data.
-\emph{Arxiv e-prints}.
 
 }
 \author{

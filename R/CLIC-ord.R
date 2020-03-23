@@ -2,34 +2,25 @@
 # this code is for calculating the asymptotic covariance 
 # matrix of CL1 estimates
 ###########################################################################
+# below i omit any exchmvn calls
 
 bvn<-function(lb, ub, rh)
-{ if(rh>0)
-  { exchmvn(lb, ub, rh) }
-  else
-  { rhmat=matrix(c(1,rh,rh,1),2,2)
-    pmvnorm(lb,ub,c(0,0),rhmat)[1]
-  }
+{ rhmat=matrix(c(1,rh,rh,1),2,2)
+  pmvnorm(lb,ub,c(0,0),rhmat)[1]
 }
 
 bvn.deriv.margin<-function(lb, ub, rh, k, ksign)
-{ if(rh>0)
-  { exchmvn.deriv.margin(lb, ub, rh, k, ksign) }
-  else
-  { rhmat=matrix(c(1,rh,rh,1),2,2)
-    mvn.deriv.margin(lb,ub,c(0,0),rhmat,k,ksign)$deriv
-  }
+{ rhmat=matrix(c(1,rh,rh,1),2,2)
+  mvn.deriv.margin(lb,ub,c(0,0),rhmat,k,ksign)$deriv
+  
 }
 
+# i have to check if this is correct!
 bvn.deriv.rho<-function(lb, ub, rh)
-{ if(rh>0)
-  { exchmvn.deriv.rho(lb, ub, rh) }
-  else
-  { rhmat=matrix(c(1,rh,rh,1),2,2)
-    mu<-c(0,0)
-    dmvnorm(ub,mu,rhmat)-dmvnorm(c(ub[1],lb[2]),mu,
-    rhmat)-dmvnorm(c(lb[1],ub[2]),mu,rhmat)+dmvnorm(lb,mu,rhmat)
-  }
+{ rhmat=matrix(c(1,rh,rh,1),2,2)
+  mu<-c(0,0)
+  dmvnorm(ub,mu,rhmat)-dmvnorm(c(ub[1],lb[2]),mu,
+  rhmat)-dmvnorm(c(lb[1],ub[2]),mu,rhmat)+dmvnorm(lb,mu,rhmat)
 }
 
 
@@ -141,16 +132,11 @@ d2v=function(d, K, ii)
 # ...: see weightedScores
 # output:  the bivariate rectangle probability
 mrect.prob<-function(zlow,zupp,rhomat,bivpairs,corstr,mvncmp)
-{ if(corstr=="exch" & min(rhomat)>0 )
-  { prob<-exchmvn(zlow,zupp,rhomat[1,2])
-  }
-  else
-  { d<-length(zlow)
-    if(mvncmp==1)
-    { prob<-mvnapp(zlow,zupp,rep(0,d),sigma=rhomat)$pr } else {
+{ d<-length(zlow)
+  if(mvncmp==1)
+  { prob<-mvnapp(zlow,zupp,rep(0,d),sigma=rhomat)$pr } else {
     set.seed(12345)
     prob<-pmvnorm(lower=zlow,upper=zupp,mean=rep(0,d),corr=rhomat)[1]
-    }
   }
   prob
 }

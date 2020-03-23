@@ -48,7 +48,7 @@
 /*#include "Mathlib.h"*/
 #include <float.h>
 #include <math.h>
-#include "mprobit.h"
+
 
 static double c[9] = {
 	0.39894151208813466764, 8.8831497943883759412,

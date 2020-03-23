@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#define M 20
+#define N 300
 
-#include "mprobit.h"
+
 /* first order approx., cond. exp. */
 /* second order approx., cond. exp. */
 void mvnapp(int *type, int *m0, double w0[], double x0[], double corr[],
@@ -37,3 +39,5 @@ void mvnapp(int *type, int *m0, double w0[], double x0[], double corr[],
    /* printf("appr. %d: %9.5f %9.5f %d\n", *type,p,perr,ierr);*/
    *pr=p; *sd=perr; *ifail=ierr;
 }
+#undef M
+#undef N

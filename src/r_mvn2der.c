@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "mprobit.h"
+#define M 20
+#define N 300
 
 /* derivatives of mvn rectangle probability */
 /* version with pointers for link to R, zero indexes are used */
@@ -294,3 +295,5 @@ double phi2(double z1, double z2, double rh)
   return( 0.1591549430918953*exp(-.5*tem)/sqrt(r1));
 }
 #endif
+#undef M
+#undef N

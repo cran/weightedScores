@@ -6,7 +6,6 @@ iee		Independent Estimating Equations
 solvewtsc	Nonlinear System Solving
 wtsc		Weighted Scores Equations 
 wtsc.wrapper		Weighted Scores Wrapper
-exchmvn                 Exchangeable (Positive) Multivariate Normal
 mvn.deriv               Derivatives of Multivariate Normal Rectangle
                         Probabilities
 mvnapp                  MVN Rectangle Probabilities

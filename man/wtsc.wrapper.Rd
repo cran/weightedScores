@@ -56,15 +56,16 @@ parameters.}
 \references{
 Nikoloulopoulos, A.K., Joe, H. and Chaganty, N.R. (2011)
 Weighted scores method for regression models with dependent data.
-\emph{Biostatistics}, \bold{12}, 653--665.
+\emph{Biostatistics}, \bold{12}, 653--665. \doi{10.1093/biostatistics/kxr005}.
 
-Nikoloulopoulos, A.K. (2015a)
+Nikoloulopoulos, A.K. (2016)
 Correlation structure and variable selection in generalized estimating equations via composite likelihood information criteria.
-\emph{Arxiv e-prints}.
+\emph{Statistics in Medicine}, \bold{35}, 2377--2390. \doi{10.1002/sim.6871}.
 
-Nikoloulopoulos, A.K. (2015b)
-Weighted scores estimating equations for longitudinal  ordinal data.
-\emph{Arxiv e-prints}.
+Nikoloulopoulos, A.K. (2017)
+Weighted scores method for longitudinal  ordinal data.
+\emph{Arxiv e-prints}, <arXiv:1510.07376>. \url{https://arxiv.org/abs/1510.07376}.
+
 }
 \author{
 Aristidis K. Nikoloulopoulos \email{A.Nikoloulopoulos@uea.ac.uk}\cr
@@ -94,7 +95,7 @@ id<-childvisit$id
 tvec<-childvisit$q
 ################################################################################
 out<-wtsc.wrapper(xdat,ydat,id,tvec,margmodel="nb1",corstr="ar",iprint=TRUE)
-\dontrun{
+\donttest{
 ################################################################################
 #                        transform to binary responses                         #
 ################################################################################
